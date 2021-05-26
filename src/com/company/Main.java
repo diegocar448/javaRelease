@@ -13,25 +13,34 @@ public class Main {
 
     
 
-    public static void main(String[] args) throws IOException {
-        printarNomeCompleto("Joao", "silva");
-        printarSoma(2,2,4);
+    public static void main(String[] args){
+        connectAndPringURLJavaOracle();
+        //printarNomeCompleto("Joao", "silva");
+        //printarSoma(2,2,4);
     }
 
 
-    public static void connectAndPringURLJavaOracle() throws IOException {
-        var url = new URL("https://docs.oracle.com/javase/10/language/");
-        var urlConnection = url.openConnection();
+    public static void connectAndPringURLJavaOracle(){
 
-        /*try {
+
+        try {
+
+            var url = new URL("https://docs.oracle.com/javase/10/language/");
+            var urlConnection = url.openConnection();
+
+            /* Não faz parte das boas praticas */
+            try(var bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()))){
+                System.out.println(bufferedReader.lines().collect(Collectors.joining()).replaceAll(">", ">\n"));
+            }
+
 
         }catch(Exception e){
+            e.printStackTrace();
+        }
 
-        }*/
 
+        //var bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
-        var bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-        System.out.println(bufferedReader.lines().collect(Collectors.joining()).replaceAll(">", ">\n"));
     }
 
 
@@ -59,7 +68,7 @@ public class Main {
     //variaveis locais inicializadas
     //variável suporte do enhaced for
     //variável suporte do for iterativo
-
+    //variavel try with resource
 
 
     //Não Consegue
@@ -67,6 +76,18 @@ public class Main {
     //var não pode ser utilizado em nivel de classe
     //var não pode ser utilizado como parâmetro
     //var nao pode ser utilizada em variaveis locais nao inicializadas
+
+    //https://docs.oracle.com/javase/10/language/
+
+    //docker container run -it -m512M --entrypoint bash openjdk:7-jdk
+    //docker container run -it -m512M --entrypoint bash openjdk:10-jdk (Versão 10 JavaJDK)
+    //java -XX:+PrintFlagsFinal -version (Mostra as configurações Java)
+    //java -XX:+PrintFlagsFinal -version | grep MaxHeapSize
+
+    //docker container run -it --cpus 2 openjdk:10-jdk
+    //Runtime.getRuntime().availableProcessors()  (Mostra a qtd de cpus-cores usadas)
+    // Para sair do jShell digitamos ( /exit )
+
 
 
 }
