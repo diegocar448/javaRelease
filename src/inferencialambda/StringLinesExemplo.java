@@ -14,7 +14,6 @@ public class StringLinesExemplo {
     }*/
 
 
-
     /*DESAFIO 1*/
     /*public static void main(String[] args) throws IOException {
 
@@ -34,4 +33,24 @@ public class StringLinesExemplo {
     }*/
 
 
+    /*DESAFIO 2*/
+    public static void main(String[] args) {
+        Locale.setDefault(new Locale("en", "US"));
+        //https://www.devmedia.com.br/como-funciona-a-classe-scanner-do-java/28448
+        Scanner sc = new Scanner(System.in);
+
+
+
+        String[] cpf = new String[4];
+        cpf = sc.nextLine().split("-");
+
+
+
+        for(int i= 0; i < cpf.length; i++) {
+            //Para cada vez que encontrarmos na string um " . " então quebramos a linha
+            System.out.println(cpf[i].replace(".","\n"));
+        }
+        //Encerramos o algoritmo
+        sc.close();
+    }
 }
