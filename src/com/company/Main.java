@@ -14,7 +14,7 @@ public class Main {
     
 
     public static void main(String[] args){
-        connectAndPringURLJavaOracle();
+        //connectAndPringURLJavaOracle();
         //printarNomeCompleto("Joao", "silva");
         //printarSoma(2,2,4);
     }

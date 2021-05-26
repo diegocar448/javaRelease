@@ -9,10 +9,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.*;
 
 public class ClientHttpExemplo {
 
@@ -28,19 +25,21 @@ public class ClientHttpExemplo {
 
 
 
-    public static void main(String[] args) throws IOException, InterruptedException{
+    public static void main(String[] args) throws Exception {
         //connectAndPringURLJavaOracle();
         connectAkanaiHttpClient();
         //printarNomeCompleto("Joao", "silva");
         //printarSoma(2,2,4);
     }
 
-    public static void connectAkanaiHttpClient() {
-        System.out.println("Runnning HTTP/1.1 example ...");
+    public static void connectAkanaiHttpClient() throws Exception {
+        //System.out.println("Runnning HTTP/1.1 example ...");
+        System.out.println("Runnning HTTP/2 example ...");
 
         try{
             HttpClient httpClient = HttpClient.newBuilder()
-                    .version(HttpClient.Version.HTTP_1_1)
+                    //.version(HttpClient.Version.HTTP_1_1)
+                    .version(HttpClient.Version.HTTP_2)
                     .proxy(ProxySelector.getDefault())
                     .build();
             long start = System.currentTimeMillis();
@@ -75,10 +74,8 @@ public class ClientHttpExemplo {
                               HttpResponse<String> imageResponse = httpClient.send(imgRequest, HttpResponse.BodyHandlers.ofString());
 
                               System.out.println("Imagem carregada :: " + image + ", status code :: " + imageResponse.statusCode());
-                          }catch(IOException e){
-                              e.printStackTrace();
-                          }catch(InterruptedException e){
-                              e.printStackTrace();
+                          }catch(IOException | InterruptedException e){
+                              System.out.println("Mensagem de erro durante requisição para recuperar a imagem "+ image);
                           }
                         });
                         future.add(imgFuture);
@@ -89,20 +86,14 @@ public class ClientHttpExemplo {
                     future.forEach(f-> {
                         try{
                             f.get();
-                        }catch(IOException e){
-                            e.printStackTrace();
-                        }catch(InterruptedException e){
-                            e.printStackTrace();
+                        }catch(InterruptedException | ExecutionException e){
+                            System.out.println("Error ao esperar carregar imagem do futuro");
                         }
                     });
                     long end = System.currentTimeMillis();
                     System.out.println("Tempo de carregamento total :: " + (end - start) + " ms");
 
 
-        }catch(InterruptedException e){
-            e.printStackTrace();
-        }catch(IOException e){
-            e.printStackTrace();
         }finally {
             executor.shutdown();
         }
