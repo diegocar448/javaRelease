@@ -34,7 +34,7 @@ public class StringLinesExemplo {
 
 
     /*DESAFIO 2*/
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Locale.setDefault(new Locale("en", "US"));
         //https://www.devmedia.com.br/como-funciona-a-classe-scanner-do-java/28448
         Scanner sc = new Scanner(System.in);
@@ -52,5 +52,5 @@ public class StringLinesExemplo {
         }
         //Encerramos o algoritmo
         sc.close();
-    }
+    }*/
 }
