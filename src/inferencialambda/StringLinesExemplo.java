@@ -56,7 +56,7 @@ public class StringLinesExemplo {
 
 
     /*DESAFIO 3*/
-    public static void main(String[] args) throws IOException {
+    /*public static void main(String[] args) throws IOException {
         Scanner leitor = new Scanner(System.in);
         int DDD = leitor.nextInt();
 
@@ -72,5 +72,5 @@ public class StringLinesExemplo {
 
             default: System.out.println("DDD nao cadastrado");
         }
-    }
+    }*/
 }
